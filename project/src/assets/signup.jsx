@@ -5,15 +5,15 @@ import './signin.css';
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirm, setConfirm] = useState('')
-  const [name, setName] = useState('')
+  const [confirm,setConfirm]= useState('')
+  const[name,setName]= useState('')
 
   const handleLogin = (e) => {
     e.preventDefault();
     console.log('Email:', email);
     console.log('Password:', password);
-    console.log('confirm :', confirm);
-    console.log('Name: ', name);
+    console.log('confirm :',confirm);
+    console.log('Name: ',name);
 
   };
 
@@ -59,7 +59,7 @@ function Signup() {
           <label>Name</label>
           <input
             type="confirm"
-            placeholder="Enter your conform Name"
+            placeholder="Enter your conform password"
             value={confirm}
             onChange={(e) => setName(e.target.value)}
             required
@@ -67,9 +67,9 @@ function Signup() {
 
           <button type="submit" className="signUp-button">Sign Up</button>
 
-          <p className="signin-text">
-            Don you have  account? <Link to="/signIn">Sign in</Link>
-          </p>
+        <p className="signin-text">
+        Don you have  account? <Link to="/signIn">Sign in</Link>
+        </p>
         </form>
       </div>
     </div>
