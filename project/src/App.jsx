@@ -1,7 +1,6 @@
 
 
 import React from 'react';
-import './App.css'
 import Signin from './assets/signin';
 import Signup from './assets/signup';
 import Home from './assets/home';
