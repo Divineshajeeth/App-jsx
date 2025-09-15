@@ -59,7 +59,7 @@ function Signup() {
           <label>Name</label>
           <input
             type="confirm"
-            placeholder="Enter your conform password"
+            placeholder="Enter your conform Name"
             value={confirm}
             onChange={(e) => setName(e.target.value)}
             required
