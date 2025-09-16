@@ -1,73 +1,33 @@
 
+import { useParams,Link } from "react-router-dom";
+function DetailPage() {
 
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-const Home = () => {
-  const [user, setUser] = useState({});
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("loggedInUser"));
-    if (!storedUser) {
-      navigate("/"); 
-    } else {
-      setUser(storedUser);
-    }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("loggedInUser");
-    navigate("/");
-  };
-
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
-      <h1 className="text-3xl font-bold mb-2">Welcome, {user.name}</h1>
-      <p className="text-lg text-gray-700 mb-6">Email: {user.email}</p>
-
-      <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded">
-        Logout
-      </button>
-    </div>
-  );
-};
-
-export default Home;
+  const { name, email } = useParams();
+  if (!name || !email) {
+    return <h2> User is Not Found</h2>
+  } return (
+    <>
+      <div className="detail">
+        <Link to="/signin">Sign out </Link>
+        <h1 className="wel">Welcome back, {name}</h1>
+        <p> Manage your account and profile settings</p>           
+             <div className="user">
+          <h2>Profile information</h2>
+          <p>Your acconut details and information</p>
+          <h3 className="users">Full Name: <br></br> {name}</h3>
+          <h3 className="users"> :e-mail:  EmailAddress: <br></br>{email}</h3>
+          <div className="users">
+            <h3 >Account Status  </h3>
+            <p className="active">Active</p>
+          </div>                
+          </div>
+      </div>
+    </>)
+}
+export default DetailPage;
 
 
 
 
 
-// import { useContext, useEffect } from 'react';
-// import { UserContext } from '../userContext/context';
-// import { useNavigate } from 'react-router-dom';
-// import './Home.css';
-
-// function Home() {
-//   const { user, setUser } = useContext(UserContext);
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     if (!user) {
-//       const stored = localStorage.getItem('user');
-//       if (stored) {
-//         setUser(JSON.parse(stored));
-//       } else {
-//         navigate('/');
-//       }
-//     }
-//   }, [user, navigate, setUser]);
-
-//   if (!user) return null;
-
-//   return (
-//     <div className="home-container">
-//       <h2>Welcome, {user.name}!</h2>
-//       <p>Your email: {user.email}</p>
-//     </div>
-//   );
-// }
-
-// export default Home;
 

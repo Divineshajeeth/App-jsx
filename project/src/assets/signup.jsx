@@ -1,20 +1,32 @@
+
 import { useState } from "react";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
 import './signin.css';
 
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirm,setConfirm]= useState('')
-  const[name,setName]= useState('')
+  const [confirm, setConfirm] = useState('');
+  const [name, setName] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('confirm :',confirm);
-    console.log('Name: ',name);
 
+    if (password !== confirm) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+  
+    const userData = { name, email, password };
+    localStorage.setItem('registeredUser', JSON.stringify(userData));
+
+    
+    localStorage.setItem('loggedInUser', JSON.stringify({ name, email }));
+
+  
+    navigate(`/home/${name}/${email}`);
   };
 
   return (
@@ -23,53 +35,51 @@ function Signup() {
       <p className="app-subtitle">Secure authentication with React Context</p>
 
       <div className="login-box">
-        <h2 className="welcome">Welcome Back</h2>
-        <p className="signin-text">Sign Up to your account to continue</p>
+        <h2 className="welcome">Create an Account</h2>
+        <p className="signin-text">Sign up to your account to continue</p>
 
-        <form onSubmit={handleLogin}>
-
+        <form onSubmit={handleSignup}>
           <label>Email</label>
           <input
             type="email"
             placeholder="Enter your email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
             required
           />
-
-          <label>Password</label>
-          <input
-            type="confirm"
-            placeholder="Enter your confirm password"
-            value={password}
-            onChange={(e) => setConfirm(e.target.value)}
-            required
-          />
-
 
           <label>Password</label>
           <input
             type="password"
             placeholder="Enter your password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
+            required
+          />
+
+          <label>Confirm Password</label>
+          <input
+            type="password"
+            placeholder="Confirm your password"
+            value={confirm}
+            onChange={e => setConfirm(e.target.value)}
             required
           />
 
           <label>Name</label>
           <input
-            type="Name"
+            type="text"
             placeholder="Enter your name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={e => setName(e.target.value)}
             required
           />
 
-          <button type="submit" className="signUp-button">Sign Up</button>
+          <button type="submit"  className="signUp-button" onClick={handleSignup}>Sign Up</button>
 
-        <p className="signin-text">
-        Don you have  account? <Link to="/signIn">Sign in</Link>
-        </p>
+          <p className="signin-text">
+            Already have an account? <Link to="/signin">Sign in</Link>
+          </p>
         </form>
       </div>
     </div>
@@ -77,6 +87,7 @@ function Signup() {
 }
 
 export default Signup;
+
 
 
 
