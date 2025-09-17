@@ -1,5 +1,7 @@
 
 import { useParams,Link } from "react-router-dom";
+import './signin.css';
+
 function DetailPage() {
 
   const { name, email } = useParams();

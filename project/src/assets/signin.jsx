@@ -6,7 +6,8 @@ import './signin.css';
 
 function Signin() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -21,10 +22,14 @@ function Signin() {
 
     if (email === savedUser.email && password === savedUser.password) {
       localStorage.setItem('loggedInUser', JSON.stringify({ name: savedUser.name, email: savedUser.email }));
-      navigate('/home');
+    
     } else {
-      alert('Invalid email or password');
+      alert('Invalid email or Name');
     }
+
+
+
+    navigate(`/home/${name}/${email}`);
   };
 
   return (
@@ -41,21 +46,23 @@ function Signin() {
           <input
             type="email"
             placeholder="Enter your email"
+            name='email'
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
           />
 
-          <label>Password</label>
+          <label>Name</label>
           <input
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
+            type="name"
+            placeholder="Enter your name"
+            name='password'
+            value={name}
+            onChange={e => setName(e.target.value)}
             required
           />
 
-          <button type="submit" className="signin-button">Sign In</button>
+          <button type="submit" className="signin-button" onClick={handleLogin}>Sign In</button>
         </form>
 
         <p className="signup-text">
